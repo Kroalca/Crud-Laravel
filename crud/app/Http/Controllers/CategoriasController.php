@@ -14,7 +14,8 @@ class CategoriasController extends Controller
      */
     public function index()
     {
-        return view('categorias.index');
+        $res['categorias']=Categorias::paginate(5);
+        return view('categorias.index', $res);
     }
 
     /**
