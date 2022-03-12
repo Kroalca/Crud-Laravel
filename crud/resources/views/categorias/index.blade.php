@@ -1,5 +1,7 @@
+@extends('layouts.app')
+@section('content')
 <div class="container">
-    <table class="table">
+    <table class="table table-striped table-bordered">
         <thead>
             <tr>
                 <th>ID</th>
@@ -16,3 +18,4 @@
         </tbody>
     </table>
 </div>
+@endsection
