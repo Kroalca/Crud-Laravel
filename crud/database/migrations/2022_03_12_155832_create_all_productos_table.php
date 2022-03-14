@@ -16,12 +16,14 @@ class CreateAllProductosTable extends Migration
         Schema::create('categorias', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->timestamps();
         });
 
-        Schema::create('almacen', function (Blueprint $table) {
+        Schema::create('almacenes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('direccion');
+            $table->string('adress');
+            $table->timestamps();
         });
 
         Schema::create('producto', function (Blueprint $table) {
@@ -29,16 +31,18 @@ class CreateAllProductosTable extends Migration
             $table->string('name');
             $table->text('observaciones');
             $table->double('column', 8, 2);
+            $table->timestamps();
             $table->integer('id_categorias')->unsigned();
             $table->foreign('id_categorias')->references('id')->on('categorias');	
         });
 
-        Schema::create('producto_almacen', function (Blueprint $table) {
+        Schema::create('producto_almacenes', function (Blueprint $table) {
             $table->integer('id_producto')->unsigned();
-            $table->integer('id_almacen')->unsigned();
-            $table->primary(array('id_producto', 'id_almacen'));	
+            $table->integer('id_almacenes')->unsigned();
+            $table->primary(array('id_producto', 'id_almacenes'));
+            $table->timestamps();	
             $table->foreign('id_producto')->references('id')->on('producto');
-            $table->foreign('id_almacen')->references('id')->on('almacen');
+            $table->foreign('id_almacenes')->references('id')->on('almacenes');
         });
     }
 
@@ -50,8 +54,8 @@ class CreateAllProductosTable extends Migration
     public function down()
     {
         Schema::dropIfExists('categorias');
-        Schema::dropIfExists('almacen');
+        Schema::dropIfExists('almacenes');
         Schema::dropIfExists('producto');
-        Schema::dropIfExists('producto_almacen');
+        Schema::dropIfExists('producto_almacenes');
     }
 }

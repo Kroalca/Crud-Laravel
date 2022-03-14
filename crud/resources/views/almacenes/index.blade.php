@@ -5,19 +5,21 @@
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
+                <th>Direccion</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($categorias as $categoria)
+            @foreach($almacenes as $almacenes)
             <tr>            
-                <td>{{ $categoria->id }}</td>
-                <td>{{ $categoria->name }}</td>
+                <td>{{ $almacenes->id }}</td>
+                <td>{{ $almacenes->name }}</td>
+                <td>{{ $almacenes->adress }}</td>
                 <td class="d-flex">
-                    <a class="btn btn-primary" href="{{ url('/categorias/'.$categoria->id.'/edit') }}">
+                    <a class="btn btn-primary" href="{{ url('/almacenes/'.$almacenes->id.'/edit') }}">
                         <i class="fa fa-pencil-square" aria-hidden="true"></i>
                     </a>
-                    <form action="{{ url('/categorias/'.$categoria->id) }}" method="post" class="ms-1">
+                    <form action="{{ url('/almacenes/'.$almacenes->id) }}" method="post" class="ms-1">
                     @csrf
                     {{ method_field('DELETE') }}
                         <button type="submit" class="btn btn-danger" onclick="return confirm('¿Quieres borrar?')">
@@ -29,5 +31,5 @@
             @endforeach
         </tbody>
     </table>
-    <a href="{{ url('/categorias/create') }}"><i class="fa fa-plus-circle add" aria-hidden="true"></i></a>
+    <a href="{{ url('/almacenes/create') }}"><i class="fa fa-plus-circle add" aria-hidden="true"></i></a>
 @endsection

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categorias;
+use App\Models\Almacenes;
 use Illuminate\Http\Request;
 
-class CategoriasController extends Controller
+class AlmacenesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class CategoriasController extends Controller
      */
     public function index()
     {
-        $res['categorias']=Categorias::paginate(5);
-        return view('categorias.index', $res);
+        $res['almacenes']=Almacenes::paginate(5);
+        return view('almacenes.index', $res);
     }
 
     /**
@@ -25,7 +25,7 @@ class CategoriasController extends Controller
      */
     public function create()
     {
-        return view('categorias.create');
+        return view('almacenes.create');
     }
 
     /**
@@ -37,17 +37,17 @@ class CategoriasController extends Controller
     public function store(Request $request)
     {
         $res = request()->except('_token');
-        Categorias::insert($res);
-        return redirect('categorias');
+        Almacenes::insert($res);
+        return redirect('almacenes');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Categorias  $categorias
+     * @param  \App\Models\Almacenes  $almacenes
      * @return \Illuminate\Http\Response
      */
-    public function show(Categorias $categorias)
+    public function show(Almacenes $almacenes)
     {
         //
     }
@@ -55,38 +55,38 @@ class CategoriasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Categorias  $categorias
+     * @param  \App\Models\Almacenes  $almacenes
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $categoria=Categorias::FindOrFail($id);
-        return view('categorias.edit', compact('categoria'));
+        $almacen=Almacenes::FindOrFail($id);
+        return view('almacenes.edit', compact('almacen'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Categorias  $categorias
+     * @param  \App\Models\Almacenes  $almacenes
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $res = request()->except(['_token','_method']);
-        Categorias::where('id','=',$id)->update($res);
-        return redirect('categorias');
+        Almacenes::where('id','=',$id)->update($res);
+        return redirect('almacenes');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Categorias  $categorias
+     * @param  \App\Models\Almacenes  $almacenes
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Categorias::destroy($id);
-        return redirect('categorias');
+        Almacenes::destroy($id);
+        return redirect('almacenes');
     }
 }
