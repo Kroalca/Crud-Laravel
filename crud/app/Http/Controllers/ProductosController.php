@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Productos;
 use App\Models\Categorias;
 use Illuminate\Http\Request;
 
-class CategoriasController extends Controller
+class ProductosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,10 @@ class CategoriasController extends Controller
      */
     public function index()
     {
-        $res['categorias']=Categorias::get();
-        return view('categorias.index', $res);
+        $res['productos']=Productos::join('categorias', 'categorias.id', '=', 'productos.id_categorias')
+            ->select('categorias.name as categoriaName' , "productos.id as id", "productos.name as name", "productos.price as price")
+            ->get();
+        return view('productos.index', $res);
     }
 
     /**
@@ -25,7 +28,8 @@ class CategoriasController extends Controller
      */
     public function create()
     {
-        return view('categorias.create');
+        $categorias=Categorias::get();
+        return view('productos.create', compact('categorias'));
     }
 
     /**
@@ -37,17 +41,17 @@ class CategoriasController extends Controller
     public function store(Request $request)
     {
         $res = request()->except('_token');
-        Categorias::insert($res);
-        return redirect('categorias');
+        Productos::insert($res);
+        return redirect('productos');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Categorias  $categorias
+     * @param  \App\Models\Productos  $productos
      * @return \Illuminate\Http\Response
      */
-    public function show(Categorias $categorias)
+    public function show(Productos $productos)
     {
         //
     }
@@ -55,38 +59,39 @@ class CategoriasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Categorias  $categorias
+     * @param  \App\Models\Productos  $productos
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $categoria=Categorias::FindOrFail($id);
-        return view('categorias.edit', compact('categoria'));
+        $producto=Productos::FindOrFail($id);
+        $categorias=Categorias::get();
+        return view('productos.edit', compact('producto','categorias'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Categorias  $categorias
+     * @param  \App\Models\Productos  $productos
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $res = request()->except(['_token','_method']);
-        Categorias::where('id','=',$id)->update($res);
-        return redirect('categorias');
+        Productos::where('id','=',$id)->update($res);
+        return redirect('productos');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Categorias  $categorias
+     * @param  \App\Models\Productos  $productos
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Categorias::destroy($id);
-        return redirect('categorias');
+        Productos::destroy($id);
+        return redirect('productos');
     }
 }

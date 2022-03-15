@@ -26,23 +26,23 @@ class CreateAllProductosTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('producto', function (Blueprint $table) {
+        Schema::create('productos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->text('observaciones');
-            $table->double('column', 8, 2);
+            $table->text('comments');
+            $table->double('price', 8, 2);
             $table->timestamps();
             $table->integer('id_categorias')->unsigned();
-            $table->foreign('id_categorias')->references('id')->on('categorias');	
+            $table->foreign('id_categorias')->references('id')->on('categorias')->onUpdate('cascade')->onDelete('cascade');
         });
 
-        Schema::create('producto_almacenes', function (Blueprint $table) {
-            $table->integer('id_producto')->unsigned();
+        Schema::create('productos_almacenes', function (Blueprint $table) {
+            $table->integer('id_productos')->unsigned();
             $table->integer('id_almacenes')->unsigned();
-            $table->primary(array('id_producto', 'id_almacenes'));
+            $table->primary(array('id_productos', 'id_almacenes'));
             $table->timestamps();	
-            $table->foreign('id_producto')->references('id')->on('producto');
-            $table->foreign('id_almacenes')->references('id')->on('almacenes');
+            $table->foreign('id_productos')->references('id')->on('productos')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_almacenes')->references('id')->on('almacenes')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -55,7 +55,7 @@ class CreateAllProductosTable extends Migration
     {
         Schema::dropIfExists('categorias');
         Schema::dropIfExists('almacenes');
-        Schema::dropIfExists('producto');
-        Schema::dropIfExists('producto_almacenes');
+        Schema::dropIfExists('productos');
+        Schema::dropIfExists('productos_almacenes');
     }
 }

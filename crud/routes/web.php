@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\AlmacenesController;
+use App\Http\Controllers\ProductosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ Route::get('/', function () {
 
 Route::resource('categorias',CategoriasController::class);
 Route::resource('almacenes',AlmacenesController::class);
+Route::resource('productos',ProductosController::class);
 
 Auth::routes();
 
