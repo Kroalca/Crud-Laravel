@@ -14,3 +14,48 @@
 .add:hover{
     color: #0b5ed7;
 }
+
+.sidebar{
+    height: 100%;
+    width: 215px;
+    background-color: #fff;
+    position: fixed;
+    text-align: center;
+    box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%) !important;
+}
+
+.sidebar .title{
+    font-weight: bolder;
+    font-size: 1.5rem;
+}
+
+.sidebar hr{
+    margin-bottom: 0;
+}
+
+.sidebar .options{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.sidebar .options a{
+    color: #000;
+    font-size: 1.25rem;
+    text-decoration: none;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.sidebar .options a:hover{
+    background-color: #ccc;
+}
+
+.content {
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 215px);
+    left: 215px;
+    transition: all 0.5s ease;
+}
