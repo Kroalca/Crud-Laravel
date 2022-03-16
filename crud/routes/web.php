@@ -16,14 +16,13 @@ use App\Http\Controllers\ProductosController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::resource('categorias',CategoriasController::class);
-Route::resource('almacenes',AlmacenesController::class);
-Route::resource('productos',ProductosController::class);
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('categorias',CategoriasController::class)->middleware('auth');
+Route::resource('almacenes',AlmacenesController::class)->middleware('auth');
+Route::get('almacenes/{almacene}/addProductos', [AlmacenesController::class, 'addProductos'])->name('almacenes.addProductos')->middleware('auth');
+Route::post('almacenes/{almacene}/storeProductos', [AlmacenesController::class, 'storeProductos'])->name('almacenes.storeProductos')->middleware('auth');
+Route::delete('almacenes/{almacene}/{producto}', [AlmacenesController::class, 'destroyProductos'])->name('almacenes.destroyProductos')->middleware('auth');
+Route::resource('productos',ProductosController::class)->middleware('auth');

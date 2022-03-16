@@ -1,4 +1,4 @@
-<input type="text" name="name" id="name" placeholder="Nombre" value="{{ isset($producto->name) ? $producto->name : '' }}" class="form-control" required>
+<input type="text" minlength="5" name="name" id="name" placeholder="Nombre" value="{{ isset($producto->name) ? $producto->name : '' }}" class="form-control" required>
 <input type="number" min="0.01" step='0.01' name="price" id="price" placeholder="Precio" value="{{ isset($producto->price) ? $producto->price : '' }}" class="form-control mt-2" required>
 <div class="form-floating mt-2">
     <select class="form-select" aria-label="Categoria" id="id_categorias" name="id_categorias">

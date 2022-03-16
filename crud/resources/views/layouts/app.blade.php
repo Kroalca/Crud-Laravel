@@ -24,7 +24,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
             <div class="container">
                 <!-- <a class="navbar-brand" href="{{ url('/') }}">
                     Productos
@@ -62,8 +62,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                        onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -78,10 +78,17 @@
             </div>
         </nav>
         <main class="h-100">
-            @include('layouts.sidebar')
-            <div class="py-4 content">
+            @auth
+                @include('layouts.sidebar')
+                <div class="py-4 content">
+                @yield('content')
+                </div>
+            @endauth
+            @guest
+            <div class="py-4">
                 @yield('content')
             </div>
+            @endguest
         </main>
     </div>
 </body>

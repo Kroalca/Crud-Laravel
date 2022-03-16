@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Almacenes;
+use App\Models\Productos;
+use App\Models\Productos_almacenes;
 use Illuminate\Http\Request;
 
 class AlmacenesController extends Controller
@@ -88,5 +90,36 @@ class AlmacenesController extends Controller
     {
         Almacenes::destroy($id);
         return redirect('almacenes');
+    }
+
+    public function addProductos($id)
+    {
+        $almacen=Almacenes::FindOrFail($id);
+        $productos=Productos::get();
+        $allProductos = Productos_almacenes::join('productos', 'productos.id', '=', 'productos_almacenes.id_productos')
+        ->select('productos.name as producto','productos.id as id_productos')
+        ->where('productos_almacenes.id_almacenes', $id)
+        ->get();
+        return view('almacenes.addProductos', compact('almacen','productos', 'allProductos'));
+    }
+
+    public function storeProductos(Request $request, $id)
+    {
+        try{
+            $res = request()->except('_token');
+            $res['id_almacenes'] = $id;
+            Productos_almacenes::insert($res);
+            return redirect('/almacenes/'.$id.'/addProductos');
+        }catch(\Exception $e){
+            return redirect('/almacenes/'.$id.'/addProductos')->withErrors(['msg' => 'El producto ya esta en el almacen.']);
+        }
+    }
+
+    public function destroyProductos($almacen,$producto)
+    {
+        Productos_almacenes::where('id_almacenes', $almacen)
+        ->where('id_productos', $producto)
+        ->delete();
+        return redirect('/almacenes/'.$almacen.'/addProductos');
     }
 }

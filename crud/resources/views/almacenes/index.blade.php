@@ -17,7 +17,10 @@
                     <td>{{ $almacen->name }}</td>
                     <td>{{ $almacen->adress }}</td>
                     <td class="d-flex">
-                        <a class="btn btn-primary" href="{{ url('/almacenes/'.$almacen->id.'/edit') }}">
+                        <a class="btn btn-success" href="{{ url('/almacenes/'.$almacen->id.'/addProductos') }}">
+                            Añadir productos
+                        </a>
+                        <a class="btn btn-primary ms-1" href="{{ url('/almacenes/'.$almacen->id.'/edit') }}">
                             <i class="fa fa-pencil-square" aria-hidden="true"></i>
                         </a>
                         <form action="{{ url('/almacenes/'.$almacen->id) }}" method="post" class="ms-1">
