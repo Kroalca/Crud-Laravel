@@ -12,6 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/main.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,9 +20,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
-</head>
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet"></head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
@@ -81,7 +80,8 @@
             @auth
                 @include('layouts.sidebar')
                 <div class="py-4 content">
-                @yield('content')
+                    <div class="mx-3" id="message"></div>
+                    @yield('content')
                 </div>
             @endauth
             @guest
