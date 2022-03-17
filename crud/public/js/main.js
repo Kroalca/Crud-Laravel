@@ -4,7 +4,6 @@ function checkInputs(){
     let inputsNumber = Object.values(document.querySelectorAll("input[type=number]"));
 
     let check = (inputsText.every(input => input.value.length>=3) && inputsNumber.every(input => parseFloat(input.value) > 0));
-    alert(check);
 
     if(!check){
         let msg = 
