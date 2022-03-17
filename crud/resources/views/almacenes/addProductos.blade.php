@@ -14,7 +14,6 @@
         <form action="{{ url('/almacenes/'.$almacen->id.'/storeProductos') }}" method="post" enctype="multipart/form-data">
         @csrf
             <div class="form-floating mt-2">
-                <input type="number" name="id_almacenes" id="id_almacenes" value="{{ isset($almacen->id) ? $almacen->id : '' }}" class="form-control visually-hidden" required disabled>
                 <select class="form-select" aria-label="Productos" id="id_productos" name="id_productos">
                     @foreach($productos as $producto)
                     <option value="{{ $producto->id }}">{{  $producto->name }}</option>
